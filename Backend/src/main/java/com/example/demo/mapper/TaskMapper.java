@@ -1,6 +1,7 @@
 package com.example.demo.mapper;
 
 import com.example.demo.models.EnumPriority;
+import com.example.demo.models.Tag;
 import com.example.demo.models.TaskDTO;
 import com.example.demo.models.TaskModel;
 
@@ -8,14 +9,16 @@ public class TaskMapper {
 
 	public static TaskModel toModel(TaskDTO dto) {
 	    String color = dto.getColor();
+	    Tag tag = dto.getTag();
+      EnumPriority priority = dto.getPriority();
 
 	    if (color == null || color.isEmpty()) {
 	        color = "#ffffff";
 	    }
+    
+	    return new TaskModel(dto.getTaskdescription(), color, tag, priority);
+	}
 
-	    return new TaskModel(dto.getTaskdescription(), color, dto.getPriority());
-
-    }
 
     public static TaskDTO toDTO(TaskModel model) {
         TaskDTO dto = new TaskDTO();
@@ -31,6 +34,7 @@ public class TaskMapper {
         dto.setTaskdescription(model.getTaskdescription());
         dto.setColor(color);
         dto.setPriority(priority);
+        dto.setTag(model.getTag());
         return dto;
     }
 }

@@ -1,12 +1,14 @@
 package com.example.demo.service;
 
-import com.example.demo.models.TaskDTO;
-import com.example.demo.mapper.TaskMapper;
-import com.example.demo.models.TaskModel;
-import com.example.demo.repository.TaskRepository;
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import com.example.demo.mapper.TaskMapper;
+import com.example.demo.models.Tag;
+import com.example.demo.models.TaskDTO;
+import com.example.demo.models.TaskModel;
+import com.example.demo.repository.TaskRepository;
 
 @Service
 public class TaskService {
@@ -31,5 +33,9 @@ public class TaskService {
 
     public boolean deleteTask(TaskDTO dto) {
         return taskRepository.deleteByDescription(dto.getTaskdescription());
+    }
+
+    public List<TaskModel> getTasksByTag(Tag tag) {
+        return taskRepository.findByTag(tag);
     }
 }
