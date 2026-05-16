@@ -52,4 +52,19 @@ class DemoApplicationTests {
         assertFalse(secondResult);
         assertEquals(1, service.getAllTasks().size());
     }
+    
+    @Test
+    void addTaskShouldUseDefaultColorWhenNoColorIsProvided() {
+        TaskRepository repository = new TaskRepository();
+        TaskService service = new TaskService(repository);
+
+        TaskDTO dto = new TaskDTO();
+        dto.setTaskdescription("Task ohne Farbe");
+
+        service.addTask(dto);
+
+        TaskModel savedTask = service.getAllTasks().get(0);
+
+        assertEquals("#ffffff", savedTask.getColor());
+    }
 }
