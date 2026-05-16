@@ -1,4 +1,4 @@
-﻿import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import logo from "./assets/react.svg";
 import "./App.css";
 
@@ -15,6 +15,7 @@ function App() {
   const [color, setColor] = useState("#ffffff");
   const [tag, setTag] = useState("");
   const [filterTag, setFilterTag] = useState("");
+  const [priority, setPriority] = useState("LOW");
 
   const fetchTodos = (selectedTag) => {
     const url = selectedTag
@@ -30,6 +31,16 @@ function App() {
     fetchTodos(filterTag);
   }, [filterTag]);
 
+  const sortedTodos = useMemo(() => {
+    const priorityOrder = { HIGH: 0, MEDIUM: 1, LOW: 2 };
+    return [...todos].sort((a, b) => priorityOrder[a.priority] - priorityOrder[b.priority]);
+  }, [todos]);
+
+
+  /** Is called when the html form is submitted. It sends a POST request to the API endpoint '/tasks' and updates the component's state with the new todo.
+   ** In this case a new taskdecription is added to the actual list on the server.
+   */
+
   const handleSubmit = (event) => {
     event.preventDefault();
     fetch("http://localhost:8080/tasks", {
@@ -39,7 +50,8 @@ function App() {
         taskdescription: taskdescription,
         color: color,
         tag: tag || null,
-      }),
+        priority: priority,
+      }), // both 'taskdescription' are identical to Task-Class attribute in Spring
     })
       .then(() => {
         setTaskdescription("");
@@ -61,21 +73,49 @@ function App() {
   };
 
   const renderTasks = (todos) => {
+    const priorityToColor = (priority) => {
+      switch (priority) {
+        case "LOW": return "#00ff00";
+        case "MEDIUM": return "#ffff00";
+        case "HIGH": return "#ff0000";
+        default: return "#ffffff";
+      }
+    };
+
+    const priorityToLabel = (priority) => {
+      switch (priority) {
+        case "LOW": return "Tief";
+        case "MEDIUM": return "Mittel";
+        case "HIGH": return "Hoch";
+        default: return priority;
+      }
+    };
+
+    const priorityOrder = { HIGH: 0, MEDIUM: 1, LOW: 2 };
+    const sorted = [...todos].sort(
+        (a, b) => priorityOrder[a.priority] - priorityOrder[b.priority]
+    );
     return (
       <ul className="todo-list">
-        {todos.map((todo, index) => (
+        {sorted.map((todo, index) => (
           <li
             key={todo.taskdescription}
             style={{
               borderLeft: `10px solid ${todo.color || "#ffffff"}`,
               paddingLeft: "10px",
+              background: priorityToColor(todo.priority),
+
             }}
           >
             <span>{"Task " + (index + 1) + ": " + todo.taskdescription}</span>
             {todo.tag && (
               <span className="todo-tag">{TAG_LABELS[todo.tag] ?? todo.tag}</span>
             )}
-            <button onClick={(event) => handleDelete(event, todo.taskdescription)}>
+            <span>{priorityToLabel(todo.priority)}</span>
+
+            <button
+              onClick={(event) => handleDelete(event, todo.taskdescription)}
+            >
               &#10004;
             </button>
           </li>
@@ -110,6 +150,12 @@ function App() {
             {Object.entries(TAG_LABELS).map(([value, label]) => (
               <option key={value} value={value}>{label}</option>
             ))}
+          </select>
+          <label htmlFor="priority">Priorität zuweisen</label>
+          <select id="priority" name="priority" onChange={(event) => setPriority(event.target.value)}>
+            <option value="LOW">Niedrig</option>
+            <option value="MEDIUM">Mittel</option>
+            <option value="HIGH">Hoch</option>
           </select>
           <button type="submit">Absenden</button>
         </form>

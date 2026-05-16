@@ -5,9 +5,15 @@ import com.example.demo.models.TaskModel;
 
 public class TaskMapper {
 
-    public static TaskModel toModel(TaskDTO dto) {
-        return new TaskModel(dto.getTaskdescription(), dto.getColor(), dto.getTag());
-    }
+	public static TaskModel toModel(TaskDTO dto) {
+	    String color = dto.getColor();
+
+	    if (color == null || color.isEmpty()) {
+	        color = "#ffffff";
+	    }
+
+	    return new TaskModel(dto.getTaskdescription(), color);
+	}
 
     public static TaskDTO toDTO(TaskModel model) {
         TaskDTO dto = new TaskDTO();
