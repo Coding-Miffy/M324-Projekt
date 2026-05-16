@@ -1,7 +1,7 @@
 import { useEffect, useState, useMemo } from "react";
 import logo from "./assets/react.svg";
 import "./App.css";
-
+import { priorityToColor, priorityToLabel } from './utils/priorityUtils'
 const TAG_LABELS = {
   ARBEIT: "Arbeit",
   SCHULE: "Schule",
@@ -73,23 +73,6 @@ function App() {
   };
 
   const renderTasks = (todos) => {
-    const priorityToColor = (priority) => {
-      switch (priority) {
-        case "LOW": return "#00ff00";
-        case "MEDIUM": return "#ffff00";
-        case "HIGH": return "#ff0000";
-        default: return "#ffffff";
-      }
-    };
-
-    const priorityToLabel = (priority) => {
-      switch (priority) {
-        case "LOW": return "Tief";
-        case "MEDIUM": return "Mittel";
-        case "HIGH": return "Hoch";
-        default: return priority;
-      }
-    };
 
     const priorityOrder = { HIGH: 0, MEDIUM: 1, LOW: 2 };
     const sorted = [...todos].sort(
@@ -104,7 +87,6 @@ function App() {
               borderLeft: `10px solid ${todo.color || "#ffffff"}`,
               paddingLeft: "10px",
               background: priorityToColor(todo.priority),
-
             }}
           >
             <span>{"Task " + (index + 1) + ": " + todo.taskdescription}</span>
