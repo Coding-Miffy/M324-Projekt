@@ -104,7 +104,6 @@ function App() {
               borderLeft: `10px solid ${todo.color || "#ffffff"}`,
               paddingLeft: "10px",
               background: priorityToColor(todo.priority),
-
             }}
           >
             <span>{"Task " + (index + 1) + ": " + todo.taskdescription}</span>
