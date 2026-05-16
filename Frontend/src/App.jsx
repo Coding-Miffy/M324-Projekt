@@ -91,7 +91,13 @@ function App() {
     return (
       <ul className="todo-list">
         {todos.map((todo, index) => (
-          <li key={todo.taskdescription}>
+          <li
+            key={todo.taskdescription}
+            style={{
+              borderLeft: `10px solid ${todo.color || "#ffffff"}`,
+              paddingLeft: "10px",
+            }}
+          >
             <span>{"Task " + (index + 1) + ": " + todo.taskdescription}</span>
             <button
               onClick={(event) => handleDelete(event, todo.taskdescription)}
