@@ -62,6 +62,9 @@ public class DemoApplication {
 		try {
 			Task task;
 			task = mapper.readValue(taskdescription, Task.class);
+			if (task.getColor() == null || task.getColor().isEmpty()) {
+			    task.setColor("#ffffff");
+			}
 			for (Task t : tasks) {
 				if (t.getTaskdescription().equals(task.getTaskdescription())) {
 					System.out.println(">>>task: '" + task.getTaskdescription() + "' already exists!");
