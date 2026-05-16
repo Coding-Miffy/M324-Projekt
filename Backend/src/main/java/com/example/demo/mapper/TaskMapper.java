@@ -16,9 +16,7 @@ public class TaskMapper {
         if (color == null || color.isEmpty()) {
             color = "#ffffff";
         }
-        if(EnumPriority.MEDIUM == model.getPriority()) {
-            dto.setPriority(EnumPriority.MEDIUM);
-        }
+
         dto.setTaskdescription(model.getTaskdescription());
         dto.setColor(color);
         dto.setPriority(model.getPriority());

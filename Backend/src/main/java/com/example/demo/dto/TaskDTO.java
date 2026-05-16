@@ -5,7 +5,7 @@ import com.example.demo.models.EnumPriority;
 public class TaskDTO {
     private String taskdescription;
     private String color;
-    EnumPriority priority;
+    private EnumPriority priority;
     public TaskDTO() {}
 
     public String getTaskdescription() { return taskdescription; }

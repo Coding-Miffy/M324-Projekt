@@ -12,7 +12,7 @@ public class TaskModel {
     public TaskModel(String taskdescription, String color,  EnumPriority priority) {
         this.taskdescription = taskdescription;
         this.color = color;
-        this.priority = EnumPriority.LOW;
+        this.priority = EnumPriority.valueOf(priority.name());
     }
 
 
