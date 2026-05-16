@@ -2,6 +2,7 @@ package com.example.demo;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import com.example.demo.models.EnumPriority;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -66,5 +67,70 @@ class DemoApplicationTests {
         TaskModel savedTask = service.getAllTasks().get(0);
 
         assertEquals("#ffffff", savedTask.getColor());
+    }
+
+
+
+    /* Tests für Prioritäten */
+    @Test
+    void addTaskShouldSaveWithHighPriority() {
+        TaskRepository repository = new TaskRepository();
+        TaskService service = new TaskService(repository);
+
+        TaskDTO dto = new TaskDTO();
+        dto.setTaskdescription("Wichtige Aufgabe");
+        dto.setColor("#ff0000");
+        dto.setPriority(EnumPriority.HIGH);
+
+        service.addTask(dto);
+
+        TaskModel saved = service.getAllTasks().get(0);
+        assertEquals(EnumPriority.HIGH, saved.getPriority());
+    }
+
+    @Test
+    void addTaskShouldSaveWithMediumPriority() {
+        TaskRepository repository = new TaskRepository();
+        TaskService service = new TaskService(repository);
+
+        TaskDTO dto = new TaskDTO();
+        dto.setTaskdescription("Mittlere Aufgabe");
+        dto.setColor("#ffff00");
+        dto.setPriority(EnumPriority.MEDIUM);
+
+        service.addTask(dto);
+
+        TaskModel saved = service.getAllTasks().get(0);
+        assertEquals(EnumPriority.MEDIUM, saved.getPriority());
+    }
+
+    @Test
+    void addTaskShouldSaveWithLowPriority() {
+        TaskRepository repository = new TaskRepository();
+        TaskService service = new TaskService(repository);
+
+        TaskDTO dto = new TaskDTO();
+        dto.setTaskdescription("Unwichtige Aufgabe");
+        dto.setColor("#00ff00");
+        dto.setPriority(EnumPriority.LOW);
+
+        service.addTask(dto);
+
+        TaskModel saved = service.getAllTasks().get(0);
+        assertEquals(EnumPriority.LOW, saved.getPriority());
+    }
+
+    @Test
+    void addTaskShouldHaveNullPriorityWhenNotSet() {
+        TaskRepository repository = new TaskRepository();
+        TaskService service = new TaskService(repository);
+
+        TaskDTO dto = new TaskDTO();
+        dto.setTaskdescription("Aufgabe ohne Priorität");
+
+        service.addTask(dto);
+
+        TaskModel saved = service.getAllTasks().get(0);
+        assertNull(saved.getPriority());
     }
 }
