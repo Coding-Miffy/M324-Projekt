@@ -40,3 +40,44 @@
 .read-the-docs {
   color: #888;
 }
+
+.todo-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+.todo-form input[type="text"] {
+  padding: 10px;
+  font-size: 1rem;
+}
+
+.todo-form input[type="color"] {
+  width: 60px;
+  height: 40px;
+  align-self: center;
+  border: none;
+  cursor: pointer;
+}
+
+.todo-list {
+  list-style: none;
+  padding: 0;
+  width: 100%;
+}
+
+.todo-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin: 10px 0;
+  padding: 12px;
+  border-radius: 8px;
+
+  background-color: white;
+  color: black;
+
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
