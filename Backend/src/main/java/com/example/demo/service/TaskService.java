@@ -1,8 +1,8 @@
 package com.example.demo.service;
 
-import com.example.demo.dto.TaskDTO;
+import com.example.demo.models.TaskDTO;
 import com.example.demo.mapper.TaskMapper;
-import com.example.demo.model.TaskModel;
+import com.example.demo.models.TaskModel;
 import com.example.demo.repository.TaskRepository;
 import org.springframework.stereotype.Service;
 

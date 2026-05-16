@@ -1,7 +1,7 @@
 package com.example.demo.mapper;
 
-import com.example.demo.dto.TaskDTO;
-import com.example.demo.model.TaskModel;
+import com.example.demo.models.TaskDTO;
+import com.example.demo.models.TaskModel;
 
 public class TaskMapper {
 
