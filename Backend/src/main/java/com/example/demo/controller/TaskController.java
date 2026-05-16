@@ -1,7 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.dto.TaskDTO;
-import com.example.demo.model.TaskModel;
+import com.example.demo.models.TaskModel;
 import com.example.demo.service.TaskService;
 import org.springframework.web.bind.annotation.*;
 

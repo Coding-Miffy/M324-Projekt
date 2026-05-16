@@ -1,12 +1,23 @@
 package com.example.demo.dto;
 
+import com.example.demo.models.EnumPriority;
+
 public class TaskDTO {
     private String taskdescription;
     private String color;
+    EnumPriority priority;
     public TaskDTO() {}
 
     public String getTaskdescription() { return taskdescription; }
     public void setTaskdescription(String taskdescription) { this.taskdescription = taskdescription; }
     public String getColor() { return color; }
     public void setColor(String color) { this.color = color; }
+
+    public void setPriority(EnumPriority priority) {
+        this.priority = priority;
     }
+
+     public EnumPriority getPriority() {
+        return priority;
+    }
+}
