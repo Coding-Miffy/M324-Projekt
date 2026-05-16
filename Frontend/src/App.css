@@ -81,3 +81,25 @@
 
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
+
+.todo-tag {
+  background-color: #646cff;
+  color: white;
+  font-size: 0.75rem;
+  padding: 2px 8px;
+  border-radius: 12px;
+  margin-left: 8px;
+}
+
+.filter-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.filter-bar select {
+  padding: 6px 10px;
+  font-size: 1rem;
+  border-radius: 6px;
+}

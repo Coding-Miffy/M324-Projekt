@@ -23,6 +23,7 @@ public class TaskMapper {
         }
         dto.setTaskdescription(model.getTaskdescription());
         dto.setColor(color);
+        dto.setTag(model.getTag());
         return dto;
     }
 }

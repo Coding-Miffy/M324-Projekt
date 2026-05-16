@@ -1,11 +1,13 @@
 package com.example.demo.repository;
 
-import com.example.demo.models.TaskModel;
-import org.springframework.stereotype.Repository;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
+import org.springframework.stereotype.Repository;
+
+import com.example.demo.models.Tag;
+import com.example.demo.models.TaskModel;
 
 @Repository
 public class TaskRepository {
@@ -34,5 +36,11 @@ public class TaskRepository {
             }
         }
         return false;
+    }
+
+    public List<TaskModel> findByTag(Tag tag) {
+        return tasks.stream()
+                .filter(t -> tag.equals(t.getTag()))
+                .collect(java.util.stream.Collectors.toList());
     }
 }
