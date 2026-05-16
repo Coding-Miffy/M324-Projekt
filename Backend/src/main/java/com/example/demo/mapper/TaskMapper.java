@@ -6,7 +6,7 @@ import com.example.demo.models.TaskModel;
 public class TaskMapper {
 
     public static TaskModel toModel(TaskDTO dto) {
-        return new TaskModel(dto.getTaskdescription(), dto.getColor());
+        return new TaskModel(dto.getTaskdescription(), dto.getColor(), dto.getTag());
     }
 
     public static TaskDTO toDTO(TaskModel model) {
@@ -17,6 +17,7 @@ public class TaskMapper {
         }
         dto.setTaskdescription(model.getTaskdescription());
         dto.setColor(color);
+        dto.setTag(model.getTag());
         return dto;
     }
 }
