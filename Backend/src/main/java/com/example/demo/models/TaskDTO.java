@@ -1,4 +1,4 @@
-package com.example.demo.dto;
+package com.example.demo.models;
 
 public class TaskDTO {
     private String taskdescription;
