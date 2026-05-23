@@ -1,20 +1,19 @@
 package com.example.demo;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import java.util.List;
 
-import com.example.demo.models.EnumPriority;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.example.demo.models.EnumPriority;
 import com.example.demo.models.TaskDTO;
 import com.example.demo.models.TaskModel;
 import com.example.demo.repository.TaskRepository;
 import com.example.demo.service.TaskService;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
-
-import java.util.List;
 
 @SpringBootTest
 class DemoApplicationTests {
