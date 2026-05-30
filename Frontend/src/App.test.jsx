@@ -3,13 +3,12 @@ import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import App from "./App";
 
 beforeEach(() => {
-  window.fetch = vi.fn((url) => {
-    if (url.includes("api/v1/tasks")) {
+  window.fetch = vi.fn((url, options) => {
+    if (options?.method === "POST") {
       return Promise.resolve({
-        json: () => Promise.resolve({}),
+        json: () => Promise.resolve({ taskdescription: "", color: "#ffffff", tag: null, priority: "LOW" }),
       });
     }
-
     return Promise.resolve({
       json: () => Promise.resolve([]),
     });
