@@ -19,8 +19,8 @@ function App() {
 
   const fetchTodos = (selectedTag) => {
     const url = selectedTag
-      ? `http://localhost:8080/tasks/filter?tag=${selectedTag}`
-      : "http://localhost:8080/";
+      ? `http://localhost:8080/api/v1/tasks/filter?tag=${selectedTag}`
+      : "http://localhost:8080/api/v1/tasks";
     fetch(url)
       .then((response) => response.json())
       .then((data) => setTodos(data))
@@ -44,7 +44,7 @@ function App() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    fetch("http://localhost:8080/tasks", {
+    fetch("http://localhost:8080/api/v1/tasks", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -64,7 +64,7 @@ function App() {
   };
 
   const handleDelete = (event, taskdescription) => {
-    fetch("http://localhost:8080/delete", {
+    fetch("http://localhost:8080/api/v1/tasks/delete", {
       method: "POST",
       body: JSON.stringify({ taskdescription: taskdescription }),
       headers: { "Content-Type": "application/json" },
