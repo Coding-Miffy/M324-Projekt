@@ -86,11 +86,11 @@ jobs:
         with:
           context: ./Backend
           push: true
-          tags: ghcr.io/${{ env.IMAGE_OWNER }}/todo-backend:latest
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/todo-backend:latest
 
       - name: Build and push frontend image
         uses: docker/build-push-action@v5
         with:
           context: ./Frontend
           push: true
-          tags: ghcr.io/${{ env.IMAGE_OWNER }}/todo-frontend:latest
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/todo-frontend:latest
