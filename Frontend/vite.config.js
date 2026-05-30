@@ -7,7 +7,9 @@ export default defineConfig({
   plugins: [react()],
   test: {
     environment: 'jsdom',
-    globals: true,
-    setupFiles: './src/setupTests.js',
-  },
+    reporters: ['default', 'junit'],
+    outputFile: {
+      junit: './reports/junit.xml'
+    }
+  }
 })
