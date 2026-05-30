@@ -5,7 +5,9 @@ import App from "./App";
 beforeEach(() => {
   window.fetch = vi.fn((url) => {
     if (url.includes("api/v1/tasks")) {
-      return Promise.resolve({});
+      return Promise.resolve({
+        json: () => Promise.resolve({}),
+      });
     }
 
     return Promise.resolve({
@@ -17,7 +19,7 @@ beforeEach(() => {
 // Color-picker tests
 describe("Todo color feature", () => {
   test("shows color picker with default value", () => {
-    render(<App />);
+    render(<App/>);
 
     const colorInput = screen.getByLabelText("Farbe auswaehlen:");
 
@@ -26,14 +28,14 @@ describe("Todo color feature", () => {
   });
 
   test("submits selected color when creating todo", async () => {
-    render(<App />);
+    render(<App/>);
 
     fireEvent.change(screen.getByLabelText("Neues Todo anlegen:"), {
-      target: { value: "Frontend Test Task" },
+      target: {value: "Frontend Test Task"},
     });
 
     fireEvent.change(screen.getByLabelText("Farbe auswaehlen:"), {
-      target: { value: "#ff0000" },
+      target: {value: "#ff0000"},
     });
 
     fireEvent.click(screen.getByText("Absenden"));
@@ -52,26 +54,26 @@ describe("Todo color feature", () => {
           }),
       );
     });
+  });
 
+    test("resets color picker to default after submitting", async () => {
+      render(<App/>);
 
-  test("resets color picker to default after submitting", async () => {
-    render(<App />);
+      const textInput = screen.getByLabelText("Neues Todo anlegen:");
+      const colorInput = screen.getByLabelText("Farbe auswaehlen:");
 
-    const textInput = screen.getByLabelText("Neues Todo anlegen:");
-    const colorInput = screen.getByLabelText("Farbe auswaehlen:");
+      fireEvent.change(textInput, {
+        target: {value: "Reset Test Task"},
+      });
 
-    fireEvent.change(textInput, {
-      target: { value: "Reset Test Task" },
-    });
+      fireEvent.change(colorInput, {
+        target: {value: "#ff0000"},
+      });
 
-    fireEvent.change(colorInput, {
-      target: { value: "#ff0000" },
-    });
+      fireEvent.click(screen.getByRole("button", {name: "Absenden"}));
 
-    fireEvent.click(screen.getByRole("button", { name: "Absenden" }));
-
-    await waitFor(() => {
-      expect(colorInput.value).toBe("#ffffff");
+      await waitFor(() => {
+        expect(colorInput.value).toBe("#ffffff");
+      });
     });
   });
-});
