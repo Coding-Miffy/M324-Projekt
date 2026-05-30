@@ -3,7 +3,13 @@ package com.example.demo.controller;
 import java.util.Arrays;
 import java.util.List;
 
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.models.Tag;
 import com.example.demo.models.TaskDTO;
@@ -12,7 +18,7 @@ import com.example.demo.service.TaskService;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/api/v1")
+@RequestMapping("/api/v1/tasks")
 public class TaskController {
 
     private final TaskService taskService;
@@ -21,12 +27,12 @@ public class TaskController {
         this.taskService = taskService;
     }
 
-    @GetMapping("/")
+    @GetMapping
     public List<TaskModel> getTasks() {
         return taskService.getAllTasks();
     }
 
-    @PostMapping("/tasks")
+    @PostMapping
     public String addTask(@RequestBody TaskDTO dto) {
         boolean added = taskService.addTask(dto);
         return "redirect:/";
@@ -38,7 +44,7 @@ public class TaskController {
         return "redirect:/";
     }
 
-    @GetMapping("/tasks/filter")
+    @GetMapping("/filter")
     public List<TaskModel> getTasksByTag(@RequestParam Tag tag) {
         return taskService.getTasksByTag(tag);
     }
