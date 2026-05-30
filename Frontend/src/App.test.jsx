@@ -4,7 +4,7 @@ import App from "./App";
 
 beforeEach(() => {
   window.fetch = vi.fn((url) => {
-    if (url.includes("/tasks")) {
+    if (url.includes("api/v1/tasks")) {
       return Promise.resolve({});
     }
 
@@ -40,19 +40,19 @@ describe("Todo color feature", () => {
 
     await waitFor(() => {
       expect(window.fetch).toHaveBeenCalledWith(
-        "http://localhost:8080/tasks",
-        expect.objectContaining({
-          method: "POST",
-          body: JSON.stringify({
-            taskdescription: "Frontend Test Task",
-            color: "#ff0000",
-            tag: null,
-            priority: "LOW",
+          "http://localhost:8080/api/v1/tasks",
+          expect.objectContaining({
+            method: "POST",
+            body: JSON.stringify({
+              taskdescription: "Frontend Test Task",
+              color: "#ff0000",
+              tag: null,
+              priority: "LOW",
+            }),
           }),
-        }),
       );
     });
-  });
+
 
   test("resets color picker to default after submitting", async () => {
     render(<App />);
