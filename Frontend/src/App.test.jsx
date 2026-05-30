@@ -41,7 +41,7 @@ describe("Todo color feature", () => {
 
     await waitFor(() => {
       expect(window.fetch).toHaveBeenCalledWith(
-          "http://localhost:8080/api/v1/tasks",
+          "http://localhost:8085/api/v1/tasks",
           expect.objectContaining({
             method: "POST",
             body: JSON.stringify({
