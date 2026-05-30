@@ -1,7 +1,7 @@
 import { useEffect, useState, useMemo } from "react";
 import logo from "./assets/react.svg";
 import "./App.css";
-import { priorityToColor, priorityToLabel } from './utils/priorityUtils'
+import { priorityToColor, priorityToLabel } from "./utils/priorityUtils";
 const TAG_LABELS = {
   ARBEIT: "Arbeit",
   SCHULE: "Schule",
@@ -33,9 +33,10 @@ function App() {
 
   const sortedTodos = useMemo(() => {
     const priorityOrder = { HIGH: 0, MEDIUM: 1, LOW: 2 };
-    return [...todos].sort((a, b) => priorityOrder[a.priority] - priorityOrder[b.priority]);
+    return [...todos].sort(
+      (a, b) => priorityOrder[a.priority] - priorityOrder[b.priority],
+    );
   }, [todos]);
-
 
   /** Is called when the html form is submitted. It sends a POST request to the API endpoint '/tasks' and updates the component's state with the new todo.
    ** In this case a new taskdecription is added to the actual list on the server.
@@ -73,10 +74,9 @@ function App() {
   };
 
   const renderTasks = (todos) => {
-
     const priorityOrder = { HIGH: 0, MEDIUM: 1, LOW: 2 };
     const sorted = [...todos].sort(
-        (a, b) => priorityOrder[a.priority] - priorityOrder[b.priority]
+      (a, b) => priorityOrder[a.priority] - priorityOrder[b.priority],
     );
     return (
       <ul className="todo-list">
@@ -91,7 +91,9 @@ function App() {
           >
             <span>{"Task " + (index + 1) + ": " + todo.taskdescription}</span>
             {todo.tag && (
-              <span className="todo-tag">{TAG_LABELS[todo.tag] ?? todo.tag}</span>
+              <span className="todo-tag">
+                {TAG_LABELS[todo.tag] ?? todo.tag}
+              </span>
             )}
             <span>{priorityToLabel(todo.priority)}</span>
 
@@ -130,11 +132,17 @@ function App() {
           <select id="tag" value={tag} onChange={(e) => setTag(e.target.value)}>
             <option value="">Kein Tag</option>
             {Object.entries(TAG_LABELS).map(([value, label]) => (
-              <option key={value} value={value}>{label}</option>
+              <option key={value} value={value}>
+                {label}
+              </option>
             ))}
           </select>
           <label htmlFor="priority">Priorität zuweisen</label>
-          <select id="priority" name="priority" onChange={(event) => setPriority(event.target.value)}>
+          <select
+            id="priority"
+            name="priority"
+            onChange={(event) => setPriority(event.target.value)}
+          >
             <option value="LOW">Niedrig</option>
             <option value="MEDIUM">Mittel</option>
             <option value="HIGH">Hoch</option>
@@ -150,7 +158,9 @@ function App() {
           >
             <option value="">Alle</option>
             {Object.entries(TAG_LABELS).map(([value, label]) => (
-              <option key={value} value={value}>{label}</option>
+              <option key={value} value={value}>
+                {label}
+              </option>
             ))}
           </select>
         </div>
