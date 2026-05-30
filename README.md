@@ -24,3 +24,6 @@ Die Pipeline führt zwei Build-Schritte aus:
    - erzeugt im `target`-Ordner das Build-Artefakt
 
 Dadurch wird bei jedem Pull Request geprüft, ob Frontend und Backend erfolgreich gebaut werden können.
+
+
+
